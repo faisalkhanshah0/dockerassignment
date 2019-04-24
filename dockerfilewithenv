@@ -1,0 +1,34 @@
+FROM ubuntu:16.04
+
+RUN apt-get update
+
+RUN apt-get install openjdk-8-jdk -y
+
+RUN apt-get install git -y
+
+RUN git --version
+
+ENV JDK_HOME /usr/lib/jvm/java-8-openjdk-amd64 
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+
+RUN mkdir tomcat
+
+COPY apache-tomcat-9.0.13.tar.gz tomcat/
+
+RUN tar -xvzf tomcat/apache-tomcat-9.0.13.tar.gz
+
+RUN mv apache-tomcat-9.0.13 tomcat8
+
+ENV TOMCAT_HOME /tomcat8
+
+WORKDIR $TOMCAT_HOME
+
+VOLUME /tomcat8/webapps
+
+EXPOSE 8080
+
+MAINTAINER faizal
+
+CMD bin/catalina.sh run
+
