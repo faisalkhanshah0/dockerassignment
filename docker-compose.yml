@@ -28,7 +28,7 @@ services:
 
 
 
-   wordpress:
+   wordpress_1:
 
      depends_on:
 
